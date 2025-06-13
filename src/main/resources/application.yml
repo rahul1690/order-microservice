@@ -1,11 +1,13 @@
 spring:
   application:
     name: ORDER-SERVICE
+  config:
+    import: configserver:http://localhost:9595
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
 
 
 # With respect to the actuator
@@ -16,7 +18,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,refresh
   endpoint:
     health:
       show-details: always
@@ -35,3 +37,5 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 3
         slidingWindowSize: 10
         slidingWindowType: COUNT_BASED
+
+
